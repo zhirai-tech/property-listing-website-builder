@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>AI 单网页生成平台 · 智睿</title>
+<!-- 外部样式表：不使用内联样式，因此 CSP 无需放开 unsafe-inline -->
+  <!-- 品牌图标（ZHIRAI / 智睿）：
+       首个 link 内联为 data URI —— 保证**离线导出**场景也能显示；
+       其余尺寸走 /brand/ 静态前缀，两个界面共用同一份文件。 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+  <link rel="apple-touch-icon" sizes="128x128" href="/brand/128x128.png">
+  <link rel="shortcut icon" href="/brand/icon.ico">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 未登录：注册 / 登录 -->
+  <div id="auth-view" class="auth">
+    <div class="auth-card">
+      <h1>AI 单网页生成平台</h1>
+      <p class="muted brand-line">
+
+        <span>生成、预览、下载，自己部署</span>
+
+        <span class="help-slot" data-help="免费用户可创建 1 个项目、使用 500,000 Token、修改 1 次；导出的网页可自行部署。升级套餐可获得更多额度与在线托管。"></span>
+
+      </p>
+
+      <div class="tabs" id="auth-tabs">
+        <button type="button" data-mode="login" class="on">登录</button>
+        <button type="button" data-mode="register">注册</button>
+      </div>
+
+      <form id="auth-form" novalidate>
+        <label class="field">
+          <span>邮箱</span>
+          <input type="email" name="email" autocomplete="username" required>
+        </label>
+        <label class="field" id="name-field" hidden>
+          <span>昵称</span>
+          <input type="text" name="displayName" autocomplete="nickname" maxlength="60">
+        </label>
+        <label class="field">
+          <span>口令 <span class="help-slot" data-help="至少 8 位。这个口令只用于登录本平台。"></span></span>
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <div id="auth-error" class="alert error" hidden></div>
+        <button type="submit" class="btn primary block" id="auth-submit">登录</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 已登录：主界面 -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <span class="brand">
+          <img class="brand-mark" src="/brand/64x64.png" width="28" height="28" alt="智睿">
+          <strong>AI 单网页生成平台</strong>
+        </span>
+      <div class="row">
+        <span class="muted small" id="who"></span>
+        <button type="button" class="btn ghost small" id="logout">退出</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 额度条 -->
+      <section class="card" id="quota-card"></section>
+
+      <!-- 项目列表 -->
+      <section id="list-section">
+        <div class="row spread mb">
+          <h2>我的项目</h2>
+          <button type="button" class="btn primary small" id="new-project">+ 新建项目</button>
+        </div>
+        <div id="new-project-form" class="card" hidden></div>
+        <div class="row spread mb" id="trash-bar">
+          <span></span>
+          <button type="button" class="btn ghost small" id="open-trash">回收站</button>
+          <button type="button" class="btn ghost small" id="open-gallery">看看能生成什么</button>
+        </div>
+        <div id="project-list"></div>
+      </section>
+
+      <!-- 项目编辑 -->
+      <section id="editor-section" hidden>
+        <div class="row spread mb">
+          <button type="button" class="btn ghost small" id="back-to-list">← 返回项目列表</button>
+          <span class="muted small" id="editor-status"></span>
+        </div>
+        <div id="editor"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+        <p class="brand-line">
+          <a href="https://zhirai.cloud" target="_blank" rel="noopener noreferrer">Powered by 智睿</a>
+          <span>·</span>把想法变成现实
+        </p>
+        <p class="brand-line muted small">
+          <a href="https://zhirai.cloud" target="_blank" rel="noopener noreferrer">https://zhirai.cloud</a>
+        </p>
+        <p class="brand-line muted small">© 2026 智睿科技 保留所有权利。</p>
+      </footer>
+  </div>
+
+  <div id="toast" class="toast" hidden role="status"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

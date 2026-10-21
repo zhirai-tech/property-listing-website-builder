@@ -1,0 +1,28 @@
+# 依赖与构建产物
+node_modules/
+*.tsbuildinfo
+
+# 运行期数据（数据库、上传媒体、备份、日志）— 绝不提交
+var/*
+!var/.gitkeep
+
+# 环境变量与密钥 — 绝不提交
+.env
+.env.local
+.env.*.local
+
+# 日志
+*.log
+logs/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+tmp/
+tmp-*
+*.tmp

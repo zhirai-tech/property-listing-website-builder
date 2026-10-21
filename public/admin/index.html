@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1220">
+  <title>房源管理后台 · 轻量化房源管理平台</title>
+  <!-- 品牌图标（ZHIRAI / 智睿）：
+       首个 link 内联为 data URI —— 保证**离线导出**场景也能显示；
+       其余尺寸走 /brand/ 静态前缀，两个界面共用同一份文件。 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+  <link rel="apple-touch-icon" sizes="128x128" href="/brand/128x128.png">
+  <link rel="shortcut icon" href="/brand/icon.ico">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 登录 -->
+  <section id="login-view" class="login-wrap">
+    <form id="login-form" class="login-card">
+      <h1>轻量化房源管理</h1>
+      <p class="muted brand-line">
+        <span>一次录入房源信息，一键生成可分享的展示页。</span>
+        <span class="help-slot" data-help="登录后可以管理房源、照片、提醒，并发布可分享的公开页面。"></span>
+      </p>
+      <label class="field">
+        <span>管理口令</span>
+        <input type="password" id="login-password" autocomplete="current-password" required autofocus>
+      </label>
+      <p id="login-error" class="error hidden"></p>
+      <button type="submit" class="btn primary block">登录</button>
+      <p class="brand-line">
+        <span class="help-slot" data-help="管理口令由服务端环境变量 ADMIN_PASSWORD 配置，不在界面里修改。"></span>
+      </p>
+      <p class="brand-line">
+        <a href="https://zhirai.cloud" target="_blank" rel="noopener noreferrer">Powered by 智睿</a>
+        <span>·</span>把想法变成现实
+      </p>
+    </form>
+  </section>
+
+  <!-- 主界面：手机用「顶部栏 + 底部标签栏」，桌面用左侧栏 -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-title">
+        <img class="brand-mark" src="/brand/64x64.png" width="28" height="28" alt="智睿">
+        <strong data-i18n="房源管理">房源管理</strong>
+        <span class="muted small" id="brand-workspace"></span>
+      </div>
+      <button id="logout" class="btn ghost small" type="button" data-i18n="退出登录">退出登录</button>
+    </header>
+
+    <aside class="sidebar">
+      <div class="brand">
+        <strong data-i18n="房源管理">房源管理</strong>
+        <span class="muted small" id="brand-workspace-side"></span>
+      </div>
+      <nav class="sidenav">
+        <a href="#/properties" data-nav="properties" data-i18n="房源管理">房源管理</a>
+        <a href="#/pages" data-nav="pages" data-i18n="发布页面">发布页面</a>
+        <a href="#/reminders" data-nav="reminders" data-i18n="发布提醒">发布提醒</a>
+        <a href="#/settings" data-nav="settings" data-i18n="设置">设置</a>
+        <a href="#/backup" data-nav="backup" data-i18n="备份与恢复">备份与恢复</a>
+      </nav>
+      <div class="sidebar-foot">
+        <button id="logout-side" class="btn ghost small block" type="button" data-i18n="退出登录">退出登录</button>
+        <p class="brand-line dark">
+          <a href="https://zhirai.cloud" target="_blank" rel="noopener noreferrer">Powered by 智睿</a>
+        </p>
+        <p class="brand-rights">© 2026 智睿科技 保留所有权利。</p>
+      </div>
+    </aside>
+
+    <main id="view" class="view" aria-live="polite"></main>
+
+    <!-- 图标由 app.js 用 icons.js 注入为内联 SVG（不使用表情符号） -->
+    <nav class="tabbar" id="nav" aria-label="主导航">
+      <a href="#/properties" data-nav="properties" data-icon="home"><span data-i18n="列表">列表</span></a>
+      <a href="#/pages" data-nav="pages" data-icon="page"><span data-i18n="页面">页面</span></a>
+      <a href="#/reminders" data-nav="reminders" data-icon="bell"><span data-i18n="提醒">提醒</span></a>
+      <a href="#/settings" data-nav="settings" data-icon="settings"><span data-i18n="设置">设置</span></a>
+      <a href="#/backup" data-nav="backup" data-icon="backup"><span data-i18n="备份">备份</span></a>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

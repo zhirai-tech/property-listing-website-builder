@@ -1,0 +1,369 @@
+/* ---------------------------------------------------------------------------
+ * hidden 属性的兜底
+ *
+ * 【为什么必须显式写这条】
+ * 浏览器对 [hidden] 的默认样式是 display: none，但它来自**用户代理样式表**，
+ * 优先级低于任何作者样式。而本文件里的 .auth { display: flex } 正好压过它 ——
+ * 结果 JS 把 auth-view.hidden 设成 true 之后，登录卡片**仍然占满首屏**，
+ * 真正的主界面被挤到屏幕之外，用户登录完还得往下滚才能看到自己的项目。
+ *
+ * 【为什么用 !important】
+ * 这正是「属性选择器 vs 类选择器」的经典冲突：只要将来有人再写一条
+ * 带 display 的类规则，同样的坑就会重演。这条兜底要压得住所有作者样式。
+ * --------------------------------------------------------------------------- */
+[hidden] { display: none !important; }
+
+/* AI 单网页生成平台 —— 移动端优先的紧凑界面。
+   与后台保持同一套视觉语言（青绿强调色、小圆角、紧凑间距）。
+   刻意不用任何内联样式，这样 CSP 无需放开 unsafe-inline。 */
+
+:root {
+  --bg: #f6f8fa;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --accent: #0d9488;
+  --accent-soft: #ccfbf1;
+  --danger: #dc2626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ---------- 未登录 ---------- */
+.auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px 40px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 20px 20px;
+}
+.auth-card h1 { font-size: 1.25rem; margin: 0 0 4px; }
+.auth-card p { margin: 0 0 16px; }
+
+.tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.tabs button {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  min-height: 40px;
+}
+.tabs button.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+/* ---------- 表单 ---------- */
+.field { display: block; margin-bottom: 12px; }
+.field > span { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select {
+  width: 100%;
+  padding: 9px 11px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+textarea { min-height: 76px; resize: vertical; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 14px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.06); color: #fff; }
+.btn.ghost { background: transparent; }
+.btn.block { width: 100%; }
+.btn.small { min-height: 34px; padding: 5px 11px; font-size: 0.85rem; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+@media (max-width: 520px) {
+  /* 手机上按钮占满一行更好点 */
+  .btn.small { min-height: 40px; }
+}
+
+/* ---------- 主界面 ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+main { padding: 12px 12px 24px; max-width: 860px; margin: 0 auto; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 14px;
+  margin-bottom: 12px;
+}
+
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.row.spread { justify-content: space-between; }
+.mb { margin-bottom: 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+h2 { font-size: 1.05rem; margin: 0; }
+
+/* 额度条 */
+.quota { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.quota .item { display: flex; flex-direction: column; gap: 2px; }
+.quota .k { font-size: 0.76rem; color: var(--muted); }
+.quota .v { font-size: 0.95rem; font-weight: 600; }
+.quota .bar { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.quota .bar > i { display: block; height: 100%; background: var(--accent); }
+.quota .bar.low > i { background: #f59e0b; }
+
+/* 项目卡片 */
+.plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.pcard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pcard h3 { margin: 0; font-size: 0.95rem; }
+.pcard .meta { font-size: 0.78rem; color: var(--muted); }
+.pcard .actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  background: var(--accent-soft);
+  color: #0f766e;
+}
+.tag.draft { background: #f1f5f9; color: var(--muted); }
+
+/* AI 区 */
+.ai-box { background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.ai-box textarea { background: #fff; }
+
+.hint { font-size: 0.78rem; color: var(--muted); margin: 6px 0 0; }
+
+/* 提示条 */
+.alert { border-radius: 9px; padding: 9px 11px; font-size: 0.86rem; margin-bottom: 10px; }
+.alert.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.alert.ok { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.alert.info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+
+.empty { color: var(--muted); padding: 18px 0; text-align: center; }
+
+.footer { text-align: center; padding: 18px 0 26px; font-size: 0.8rem; color: var(--muted); }
+.footer a { color: var(--muted); }
+
+/* toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  z-index: 100;
+  max-width: 90vw;
+  text-align: center;
+}
+/* 照片网格 */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+}
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px;
+  background: #fff;
+}
+.photo img {
+  width: 100%;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 7px;
+  background: #f1f5f9;
+  display: block;
+}
+.photo .meta {
+  font-size: 0.72rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.photo .btn { width: 100%; }
+.photo-missing {
+  height: 84px;
+  border-radius: 7px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+/* 手机上文件选择框不要撑破布局 */
+input[type="file"] {
+  max-width: 100%;
+  font: inherit;
+  font-size: 0.85rem;
+}
+/* 快到期的提示 */
+.pcard .meta.warn { color: #b45309; font-weight: 600; }
+/* 示例按钮：不要撑成一大块 */
+.ai-box .row { margin-top: 6px; }
+.ai-box .btn.small { white-space: nowrap; }
+/* 示例画廊的预览框 */
+.ex-frame {
+  width: 100%;
+  height: 168px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  display: block;
+}
+/* 托管状态与地址 */
+.pcard .meta.live { color: #0f766e; font-weight: 600; }
+.meta.url {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  word-break: break-all;
+  text-decoration: none;
+}
+.meta.url:hover { text-decoration: underline; }
+.row.hosted {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 9px;
+  align-items: center;
+}
+/* ---------------------------------------------------------------------------
+ * 品牌标识（ZHIRAI / 智睿）
+ *
+ * 图标直接引用 public/assets/brand/ 下用户品牌档案里的原图：
+ * 不重绘、不调色、不拉伸，只按原始比例摆放（width/height 都是 28）。
+ * --------------------------------------------------------------------------- */
+.brand, .topbar-title { display: inline-flex; align-items: center; gap: 8px; }
+.brand-mark {
+  display: block;
+  flex: none;
+  border-radius: 7px;
+  /* 图标本身是方形，圆角只做轻微柔化，不改图形 */
+}
+.brand-line { margin: 0; }
+.brand-line + .brand-line { margin-top: 2px; }
+.brand-line > span { margin: 0 4px; opacity: 0.6; }
+.footer { text-align: center; }
+.footer a { color: inherit; }
+/* ---------------------------------------------------------------------------
+ * 问号帮助图标
+ *
+ * 【全局约定】说明类文案一律收进这个图标，不直接铺在页面上。
+ * 界面默认只呈现操作本身；用户想了解细节时自己点开。
+ * 这条约定适用于所有项目。
+ * --------------------------------------------------------------------------- */
+.help { position: relative; display: inline-flex; vertical-align: middle; }
+.help-btn {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  opacity: 0.45;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
+.help-btn:hover, .help.open .help-btn { opacity: 1; }
+.help-tip {
+  display: none;
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(280px, 78vw);
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #0b1220;
+  color: #f8fafc;
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  white-space: normal;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28);
+}
+.help-tip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-bottom-color: #0b1220;
+}
+.help:hover .help-tip,
+.help:focus-within .help-tip,
+.help.open .help-tip { display: block; }
+.help-slot { display: inline-flex; }
