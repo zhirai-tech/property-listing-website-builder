@@ -1,3 +1,11 @@
+> **简体中文 | English**
+>
+> 轻量化房源管理与一键房源网站生成平台：录入房源、上传照片/视频，生成手机/桌面展示页，支持静态 HTML、地图、多语言和发布后提醒。
+>
+> **Lightweight Property Listing Manager**: enter a property, upload photos/video, generate responsive listing pages, static HTML export, maps, i18n and post-publish reminders.
+
+---
+
 # 轻量化房源管理与一键房源网站生成平台
 
 一次录入房源信息，上传照片与视频，即可生成手机/桌面自适应的可分享展示页，并支持静态 HTML 导出、地图定位、多语言、自定义域名与发布后的第 7/15 天提醒。
