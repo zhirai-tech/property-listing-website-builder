@@ -1,6 +1,6 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-# Lightweight Property Listing Manager
+# Property Listing Website Builder
 
 A lightweight property listing manager and one-click listing-site generator.
 
