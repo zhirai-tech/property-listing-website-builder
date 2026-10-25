@@ -8,6 +8,15 @@
 
 # 轻量化房源管理与一键房源网站生成平台
 
+## Screenshots / 截图
+
+![Admin properties](docs/evidence/02-admin-properties.png)
+![Public listing desktop](docs/evidence/04-public-page-desktop.png)
+![Public listing mobile](docs/evidence/12-public-page-mobile.png)
+
+*Admin, desktop and mobile listing views from the repository evidence folder. / 仓库证据目录中的后台、桌面端和移动端房源页面。*
+
+
 一次录入房源信息，上传照片与视频，即可生成手机/桌面自适应的可分享展示页，并支持静态 HTML 导出、地图定位、多语言、自定义域名与发布后的第 7/15 天提醒。
 
 > **移动端优先**：手机是主要使用场景，所有页面（含后台管理）都按手机优先设计——底部菜单栏、可折叠信息区块、表格在窄屏自动变成卡片、保存按钮吸附在底部。桌面端只是加宽并换成顶部菜单/侧栏，结构完全一致，不做两套页面。
