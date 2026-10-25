@@ -6,7 +6,12 @@
 
 ---
 
-# 轻量化房源管理与一键房源网站生成平台
+# Lightweight Property Listing Manager / 轻量化房源管理
+
+> **English** | [简体中文](#简体中文)
+>
+> A lightweight property listing manager and one-click listing-site generator: property entry, photo/video, shareable pages, static HTML export, maps, i18n and reminders.
+
 
 ## Screenshots / 截图
 
